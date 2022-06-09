@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">AtmTransaction</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="str_withdraw">Withdraw</string>
+    <string name="str_error_valid_amount">please enter valid amount</string>
+    <string name="str_lasttransaction">Last Transaction</string>
+    <string name="done">Successful</string>
+    <string name="str_error_multiple">Please Enter Amount-> For example </string>
+    <string name="str_atm">ATM Amount</string>
+    <string name="str_hundred">Rs.100</string>
+    <string name="str_twohund">Rs.200</string>
+    <string name="str_fivehund">Rs.500</string>
+    <string name="str_thousand">Rs.2000</string>
+</resources>
