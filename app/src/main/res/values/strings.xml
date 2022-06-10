@@ -5,10 +5,12 @@
     <string name="str_error_valid_amount">please enter valid amount</string>
     <string name="str_lasttransaction">Last Transaction</string>
     <string name="done">Successful</string>
-    <string name="str_error_multiple">Please Enter Amount-> For example </string>
+    <string name="str_error_multiple">Enter Multiple of 100-> For example :(100,200,500,2000)</string>
     <string name="str_atm">ATM Amount</string>
     <string name="str_hundred">Rs.100</string>
     <string name="str_twohund">Rs.200</string>
     <string name="str_fivehund">Rs.500</string>
     <string name="str_thousand">Rs.2000</string>
+    <string name="str_yourtransaction">Your Transactions</string>
+    <string name="str_not_enough_balanace">You do not have enough balance to withdraw.</string>
 </resources>

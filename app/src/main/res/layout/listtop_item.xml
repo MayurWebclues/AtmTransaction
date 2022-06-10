@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:elevation="5dp"
-    app:cardCornerRadius="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -19,14 +17,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:hint="@string/str_atm"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="ATM Amount"
-            android:layout_width="wrap_content"
+            android:text="@string/str_atm"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -37,14 +34,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:hint="@string/str_atm"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:text="@string/str_hundred"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -55,14 +51,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:hint="@string/str_atm"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:text="@string/str_twohund"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -73,14 +68,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:hint="@string/str_atm"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:text="@string/str_fivehund"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -91,16 +85,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:hint="@string/str_atm"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:text="@string/str_thousand"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -2,26 +2,27 @@ package com.atmtransaction.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.atmtransaction.R
-import com.atmtransaction.databinding.ActivityMainBinding
+import com.atmtransaction.databinding.MainlayoutBinding
 import com.atmtransaction.db.model.AddTransactionsModel
-import com.atmtransaction.utility.phoneWatcher
+import com.atmtransaction.utility.Utility
 import com.atmtransaction.utility.toast
-import com.google.gson.Gson
+import com.atmtransaction.utility.validate
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     val viewModel: MainViewModel by inject()
     private var transactionList: MutableList<AddTransactionsModel> = ArrayList()
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: MainlayoutBinding
     private val context = this@MainActivity
     private var check = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = MainlayoutBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         initUI()
@@ -32,14 +33,19 @@ class MainActivity : AppCompatActivity() {
         addTextWatcher()
         addListener()
         setDataToFixAmountLayout()
+        showHide()
     }
 
     private fun addListener() {
         binding.buttonWithdraw.setOnClickListener {
+            Utility.hideKeyboard(context)
             if (!check) {
                 if (binding.editText.text.toString().isBlank() && binding.editText.text.toString().isEmpty()) return@setOnClickListener
+                if (viewModel.textBalanceFix < binding.editText.text.toString().toInt()) {
+                    context.toast(getString(R.string.str_not_enough_balanace))
+                    return@setOnClickListener
+                }
                 if (binding.editText.text.toString().toInt().mod(4) == 0) {
-                    context.toast(getString(R.string.done))
                     viewModel.withdrawCash(binding.editText.text.toString().toInt())
                     binding.editText.setText("")
                 } else {
@@ -50,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getAllUser().observe(this, Observer {
             if (it.isNullOrEmpty().not()) {
-                Log.e("print", Gson().toJson(it))
                 transactionList.clear()
                 transactionList.addAll(it)
                 val adapter = TransactionAdapter(transactionList)
@@ -59,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
                 setDataToLastTransection()
                 setDataToFixAmountLayout()
+                showHide()
             } else {
                 Log.e("print", "it.toString()")
             }
@@ -71,12 +77,19 @@ class MainActivity : AppCompatActivity() {
                 viewModel.textAmountFix500 = it.countRupee500
                 viewModel.textAmountFix2000 = it.countRupee2000
                 viewModel.textBalanceFix = it.total_balance
-
                 setDataToFixAmountLayout()
             }
-
         }
+    }
 
+    private fun showHide() {
+        if (transactionList.size > 0) {
+            binding.lastlistLayout!!.visibility = View.VISIBLE
+            binding.llAlllist!!.visibility = View.VISIBLE
+        } else {
+            binding.lastlistLayout!!.visibility = View.GONE
+            binding.llAlllist!!.visibility = View.GONE
+        }
     }
 
     private fun setDataToFixAmountLayout() {
@@ -89,8 +102,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setDataToLastTransection() {
         var lastIndex = transactionList.size - 1
-        Log.e("print", "it.toString()" + transactionList[0].withdraw_amount.toString())
-        binding.lastTransactionLayout.textLastWithdraw.text = "Rs ${transactionList[lastIndex].withdraw_amount.toString()}"
+        binding.lastTransactionLayout.textLastWithdraw.text = "Rs.${transactionList[lastIndex].withdraw_amount.toString()}"
         binding.lastTransactionLayout.textLast100.text = transactionList[lastIndex].rupee100.toString()
         binding.lastTransactionLayout.textLast200.text = transactionList[lastIndex].rupee200.toString()
         binding.lastTransactionLayout.textLast500.text = transactionList[lastIndex].rupee500.toString()
@@ -99,7 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addTextWatcher() {
-        binding.editText.phoneWatcher {
+        binding.editText.validate {
             setUiAsValidation(it)
         }
     }

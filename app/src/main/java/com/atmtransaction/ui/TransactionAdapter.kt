@@ -29,7 +29,7 @@ class TransactionAdapter(private val dataList: List<AddTransactionsModel>) : Rec
 
     class MyViewHolder(private val binding: TransectionListBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(get: AddTransactionsModel) {
-            binding.textAmountWithdraw.text=get.withdraw_amount.toString()
+            binding.textAmountWithdraw.text="Rs."+get.withdraw_amount.toString()
             binding.textAmount100.text=get.rupee100.toString()
             binding.textAmount200.text=get.rupee200.toString()
             binding.textAmount500.text=get.rupee500.toString()

@@ -32,28 +32,22 @@ open class MainViewModel(val transactDao: TransactionsDao) : ViewModel() {
                 )
             )
             transactDao.insertTransaction(addTransact)
-
         }
     }
 
 
-
-    private val currDenom = intArrayOf(2000, 500, 200, 100)
-
-
-    private var currNo = intArrayOf(10, 25, 50, 75)
-
-
+    private val noteMultiple = intArrayOf(2000, 500, 200, 100)
+    private var noofNotes = intArrayOf(10, 25, 50, 75)
     private var count = intArrayOf(0, 0, 0, 0)
-    private var totalCorpus = 0
+    private var totalNotes = 0
 
     init {
-        calcTotalCorpus()
+        calculateTotal()
     }
 
-    open fun calcTotalCorpus() {
-        for (i in currDenom.indices) {
-            totalCorpus = totalCorpus + currDenom[i] * currNo[i]
+    open fun calculateTotal() {
+        for (i in noteMultiple.indices) {
+            totalNotes = totalNotes + noteMultiple[i] * noofNotes[i]
         }
     }
 
@@ -61,23 +55,19 @@ open class MainViewModel(val transactDao: TransactionsDao) : ViewModel() {
     open fun withdrawCash(amount: Int) {
         userAmout = amount
         var amount = amount
-        if (amount <= totalCorpus) {
-            for (i in currDenom.indices) {
-                if (currDenom[i] <= amount) { //If the amount is less than the currDenom[i] then that particular denomination cannot be dispensed
-                    val noteCount = amount / currDenom[i]
-                    if (currNo[i] > 0) { //To check whether the ATM Vault is left with the currency denomination under iteration
-                        //If the Note Count is greater than the number of notes in ATM vault for that particular denomination then utilize all of them
-                        count[i] = if (noteCount >= currNo[i]) currNo[i] else noteCount
-                        currNo[i] = if (noteCount >= currNo[i]) 0 else currNo[i] - noteCount
-                        //Deduct the total corpus left in the ATM Vault with the cash being dispensed in this iteration
-                        totalCorpus = totalCorpus - count[i] * currDenom[i]
-                        //Calculate the amount that need to be addressed in the next iterations
-                        amount = amount - count[i] * currDenom[i]
+        if (amount <= totalNotes) {
+            for (i in noteMultiple.indices) {
+                if (noteMultiple[i] <= amount) {
+                    val noteCount = amount / noteMultiple[i]
+                    if (noofNotes[i] > 0) {
+                        count[i] = if (noteCount >= noofNotes[i]) noofNotes[i] else noteCount
+                        noofNotes[i] = if (noteCount >= noofNotes[i]) 0 else noofNotes[i] - noteCount
+                        totalNotes = totalNotes - count[i] * noteMultiple[i]
+                        amount = amount - count[i] * noteMultiple[i]
                     }
                 }
             }
             displayNotes()
-            displayLeftNotes()
         } else {
             println("Unable to dispense cash at this moment for this big amount")
         }
@@ -87,8 +77,8 @@ open class MainViewModel(val transactDao: TransactionsDao) : ViewModel() {
         val model = AddTransactionsModel()
         for (i in count.indices) {
             if (count[i] != 0) {
-                println(currDenom[i].toString() + " * " + count[i] + " = " + currDenom[i] * count[i])
-                when (currDenom!![i]) {
+                println(noteMultiple[i].toString() + " * " + count[i] + " = " + noteMultiple[i] * count[i])
+                when (noteMultiple!![i]) {
                     100 -> {
                         model.rupee100 = count[i]
                         textAmountFix100 -= count[i]
@@ -110,17 +100,11 @@ open class MainViewModel(val transactDao: TransactionsDao) : ViewModel() {
         }
 
         model.withdraw_amount = userAmout
-        textBalanceFix-=userAmout
+        textBalanceFix -= userAmout
         addTransaction(model)
     }
 
-    private fun displayLeftNotes() {
-        for (i in currDenom.indices) {
-            println("Notes of " + currDenom[i] + " left are " + currNo[i])
 
-        }
-
-    }
 
 
 }
