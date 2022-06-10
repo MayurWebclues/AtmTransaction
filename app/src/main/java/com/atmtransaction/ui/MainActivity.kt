@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.atmtransaction.R
 import com.atmtransaction.databinding.ActivityMainBinding
 import com.atmtransaction.db.model.AddTransactionsModel
 import com.atmtransaction.utility.phoneWatcher
 import com.atmtransaction.utility.toast
+import com.google.gson.Gson
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private fun initUI() {
         addTextWatcher()
         addListener()
-
+        setDataToFixAmountLayout()
     }
 
     private fun addListener() {
@@ -43,22 +45,38 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     context.toast(getString(R.string.str_error_multiple))
                 }
-
             }
         }
 
         viewModel.getAllUser().observe(this, Observer {
             if (it.isNullOrEmpty().not()) {
-
-                Log.e("print", it.toString())
+                Log.e("print", Gson().toJson(it))
+                transactionList.clear()
                 transactionList.addAll(it)
+                val adapter = TransactionAdapter(transactionList)
+                binding.rvRecyclerView.layoutManager = LinearLayoutManager(context)
+                binding.rvRecyclerView.adapter = adapter
+                adapter.notifyDataSetChanged()
                 setDataToLastTransection()
+                setDataToFixAmountLayout()
             } else {
                 Log.e("print", "it.toString()")
             }
         })
 
-        setDataToFixAmountLayout()
+        viewModel.getBaseTransection().observe(this) {
+            if (it != null) {
+                viewModel.textAmountFix100 = it.countRupee100
+                viewModel.textAmountFix200 = it.countRupee200
+                viewModel.textAmountFix500 = it.countRupee500
+                viewModel.textAmountFix2000 = it.countRupee2000
+                viewModel.textBalanceFix = it.total_balance
+
+                setDataToFixAmountLayout()
+            }
+
+        }
+
     }
 
     private fun setDataToFixAmountLayout() {
@@ -70,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setDataToLastTransection() {
-        var lastIndex = transactionList.size-1
+        var lastIndex = transactionList.size - 1
         Log.e("print", "it.toString()" + transactionList[0].withdraw_amount.toString())
         binding.lastTransactionLayout.textLastWithdraw.text = "Rs ${transactionList[lastIndex].withdraw_amount.toString()}"
         binding.lastTransactionLayout.textLast100.text = transactionList[lastIndex].rupee100.toString()
@@ -92,10 +110,5 @@ class MainActivity : AppCompatActivity() {
             context.toast(getString(R.string.str_error_valid_amount))
         }
         return check
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
     }
 }

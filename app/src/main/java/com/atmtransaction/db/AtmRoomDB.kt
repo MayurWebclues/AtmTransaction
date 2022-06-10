@@ -4,8 +4,9 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.atmtransaction.db.dao.TransactionsDao
 import com.atmtransaction.db.model.AddTransactionsModel
+import com.atmtransaction.db.model.BaseTransactionsModel
 
-@Database(entities = [AddTransactionsModel::class], version = 1, exportSchema = false)
+@Database(entities = [AddTransactionsModel::class,BaseTransactionsModel::class], version = 1, exportSchema = false)
 abstract class AtmRoomDB : RoomDatabase() {
 
     abstract val getTransactionDao: TransactionsDao

@@ -28,16 +28,7 @@
             android:text="ATM Amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/textAmountWithdraw"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_weight="1"
@@ -52,19 +43,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Rs 100"
+            android:text="@string/str_hundred"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/textAmount100"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_weight="1"
@@ -79,19 +61,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Rs 200"
+            android:text="@string/str_twohund"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/textAmount200"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_weight="1"
@@ -106,19 +79,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Rs 500"
+            android:text="@string/str_fivehund"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/textAmount500"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_weight="1"
@@ -133,19 +97,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Rs 2000"
+            android:text="@string/str_thousand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/textAmount2000"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
     </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

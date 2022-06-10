@@ -6,6 +6,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3428442028985507" />
         <entry key="app/src/main/res/layout/fixbalance.xml" value="0.3428442028985507" />
         <entry key="app/src/main/res/layout/last_trasction.xml" value="0.3428442028985507" />
+        <entry key="app/src/main/res/layout/listtop_item.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/listtopitem.xml" value="0.3541666666666667" />
+        <entry key="app/src/main/res/layout/transection_list.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/trasaction_list.xml" value="0.3428442028985507" />
       </map>
     </option>
